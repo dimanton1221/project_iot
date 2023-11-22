@@ -1,0 +1,19 @@
+body{
+    display: flex;
+    justify-content: center;
+}
+
+.judul{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    background-color:aquamarine;
+    border-radius: 25px;
+    width: 50%;
+}
+
+.parkir{
+    background-color: aquamarine;
+    width: 50%;
+}
