@@ -9,6 +9,8 @@ const io = socket(server, {
         origin: "*",
     }
 });
+// tambahkan statis file folder 
+app.use(express.static('public'));
 const port = 3000;
 const mqtt = require('mqtt');
 const cors = require('cors');
@@ -53,7 +55,7 @@ io.on('connection', (socket) => {
         // console.log("ngirim coy");
         socket.emit(topic.toString(), message.toString());
 
-    })
+    });
 
 
     socket.on('disconnect', () => {
