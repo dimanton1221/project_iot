@@ -112,13 +112,22 @@ function carexit(slot) {
 function generatenewcar(slot) {
     var space = document.getElementById('parkingspace');
     let img = document.createElement('img');
-    img.src = 'vehicle.png';
+
+    // Array berisi berbagai nama file gambar mobil
+    // make until 12 png cars 
+    var carImages = ['car.png', 'vehicle.png', "car2.png", "car3.png", "car4.png","car5.png","car6.png","car7.png","car8.png","car9.png", "car10.png", "car11.png", "car12.png"];
+
+    // Memilih gambar secara acak dari array
+    var randomImage = carImages[Math.floor(Math.random() * carImages.length)];
+
+    img.src = randomImage;
     img.className = 'new-car-origin';
-    img.style.width = (w * .8) * .1 + 'px';
+    img.style.width = (w * 0.8) * 0.1 + 'px';
     img.id = 'car' + slot.toString();
-    space.appendChild(img)
+    space.appendChild(img);
 }
 
+// vehicle.png
 
 function carExit(slot) {
     if (!parklock) {
