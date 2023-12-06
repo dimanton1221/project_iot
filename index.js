@@ -1,8 +1,37 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = 3000;
+const port = 4000;
 require("./config/database");
+const mqtt = require('mqtt');
+const socketIO = require('socket.io');
+const http = require('http');
+const serverSocket = http.createServer(app);
+const anjirr = socketIO(serverSocket, {
+    cors: {
+        origin: '*',
+    }
+});
+
+anjirr.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+});
+
+
+const client = mqtt.connect('mqtt://127.0.0.1:1883');
+
+
+client.on('connect', function () {
+    client.subscribe('Timbangan');
+});
+
+
+
+
+
 // pengennya sih ngambil kamu tapi kok dapatnya socket io
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, {
@@ -36,6 +65,8 @@ app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
+
+
 // socket io ini itu kayak gambaran serealtime apa aku ke kamu
 io.on('connection', (socket) => {
     // sambil aku bingung aku selalu menunggu emm mu
@@ -53,8 +84,14 @@ io.on('connection', (socket) => {
         // socket.emit('message', data);
     });
     socket.on('disconnect', () => {
-        console.log('user disconnected');
+        console.log('orangnya hilang coyy');
     });
+
+    client.on('message', function (topic, message) {
+        socket.emit('Timbangan', message.toString());
+    });
+
+
 });
 
 
