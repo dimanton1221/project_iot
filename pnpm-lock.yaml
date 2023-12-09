@@ -27,7 +27,7 @@ dependencies:
     specifier: ^8.5.1
     version: 8.5.1
   mqtt:
-    specifier: ^5.3.1
+    specifier: ^5.3.2
     version: 5.3.2
   multer:
     specifier: ^1.4.5-lts.1
